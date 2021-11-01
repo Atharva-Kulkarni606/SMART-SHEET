@@ -50,10 +50,20 @@ for(let i = 0 ; i < rows; i++) {
         let cell =  document.createElement("div");
         cell.setAttribute("class" , "cell");
         cell.setAttribute("contenteditable" , "true");
+        cell.setAttribute("spellcheck", "false");
+        //FOR IDENTIFICATION OF APPROPRIATE STORAGE CELL
+        cell.setAttribute("rid", i);
+        cell.setAttribute("cid" , j);
+        
         rowCont.appendChild(cell);
         AddressBarDisplayController(cell, i , j);
     }
     CellsCont.appendChild(rowCont);
 }
+
+
+//default cell selection - via dom so that event listener doesnt give error
+let firstCell = document.querySelector(".cell"); //returns the first cell
+firstCell.click();
 
 
