@@ -13,7 +13,10 @@ for(let i = 0 ; i < rows; i++) {
             fontFamily : "monospace",
             fontSize : "14",
             fontColor : "#000000", // black default(only indication)
-            BGcolor : "#000000" // default value (only indication)
+            BGcolor : "#000000", // default value (only indication)
+            value : "",
+            formula : "",
+            children : [],
         }
         sheetRow.push(cellProp);
     }
@@ -43,7 +46,7 @@ bold.addEventListener("click" , (e) => {
     //FIRST FIND WHICH CELL IS ACTIVE (ON WHICH CELL U WANNA APPLY BOLD PROP)
     //TAKE THE CELL DIRECTY FROM ADDRESS BAR AND DECODE IT TO GET THE COORDINATES
     let address = addressBar.value;
-    let  [cell , cellProp] = getActiveCell(address);
+    let  [cell , cellProp] = getCellAndCellProp(address);
 
     //MODIFICATION
     // DBCHANGE 
@@ -59,7 +62,7 @@ italic.addEventListener("click" , (e) => {
     //FIRST FIND WHICH CELL IS ACTIVE (ON WHICH CELL U WANNA APPLY BOLD PROP)
     //TAKE THE CELL DIRECTY FROM ADDRESS BAR AND DECODE IT TO GET THE COORDINATES
     let address = addressBar.value;
-    let  [cell , cellProp] = getActiveCell(address);
+    let  [cell , cellProp] = getCellAndCellProp(address);
 
     //MODIFICATION
     // DBCHANGE 
@@ -75,7 +78,7 @@ underline.addEventListener("click" , (e) => {
     //FIRST FIND WHICH CELL IS ACTIVE (ON WHICH CELL U WANNA APPLY BOLD PROP)
     //TAKE THE CELL DIRECTY FROM ADDRESS BAR AND DECODE IT TO GET THE COORDINATES
     let address = addressBar.value;
-    let  [cell , cellProp] = getActiveCell(address);
+    let  [cell , cellProp] = getCellAndCellProp(address);
 
     //MODIFICATION
     // DBCHANGE 
@@ -88,7 +91,7 @@ underline.addEventListener("click" , (e) => {
 
 fontSize.addEventListener("change" , (e) => {
     let address = addressBar.value;
-    let  [cell , cellProp] = getActiveCell(address);
+    let  [cell , cellProp] = getCellAndCellProp(address);
     //MODIFICATION
     // DBCHANGE
     cellProp.fontSize = fontSize.value;
@@ -99,7 +102,7 @@ fontSize.addEventListener("change" , (e) => {
 
 fontFamily.addEventListener("change" , (e) => {
     let address = addressBar.value;
-    let  [cell , cellProp] = getActiveCell(address);
+    let  [cell , cellProp] = getCellAndCellProp(address);
     //MODIFICATION
     // DBCHANGE
     cellProp.fontFamily = fontFamily.value;
@@ -110,7 +113,7 @@ fontFamily.addEventListener("change" , (e) => {
 
 fontColor.addEventListener("change" , (e) => {
     let address = addressBar.value;
-    let  [cell , cellProp] = getActiveCell(address);
+    let  [cell , cellProp] = getCellAndCellProp(address);
     //MODIFICATION
     // DBCHANGE
     cellProp.fontColor = fontColor.value;
@@ -121,7 +124,7 @@ fontColor.addEventListener("change" , (e) => {
 
 BGcolor.addEventListener("change" , (e) => {
     let address = addressBar.value;
-    let  [cell , cellProp] = getActiveCell(address);
+    let  [cell , cellProp] = getCellAndCellProp(address);
     //MODIFICATION
     // DBCHANGE
     cellProp.BGcolor = BGcolor.value;
@@ -134,7 +137,7 @@ BGcolor.addEventListener("change" , (e) => {
 alignment.forEach((alignElem) => {
     alignElem.addEventListener("click" , (e) => {
         let address = addressBar.value;
-        let  [cell , cellProp] = getActiveCell(address);
+        let  [cell , cellProp] = getCellAndCellProp(address);
 
         let alignValue = e.target.classList[0];
         //MODIFICATION
@@ -157,6 +160,8 @@ alignment.forEach((alignElem) => {
                             rightAlign.style.backgroundColor = activeColorProp;
                             break;
         }
+
+        
     });
 });
 
@@ -206,10 +211,13 @@ function addListenerToAttachCellProperties(cell){
                             rightAlign.style.backgroundColor = activeColorProp;
                             break;
         }
+        let formulaBar = document.querySelector(".formula-bar");
+        formulaBar.value = cellProp.formula;
+        cell.value = cellProp.value;
     });
 };
 
-function getActiveCell(address) {
+function getCellAndCellProp(address) {
     let [rid , cid] = decodeRIDCIDFromAddress(address);
     //ACCESS CELL AND STORAGE CELL
     let cell = document.querySelector(`.cell[rid = "${rid}"][cid = "${cid}"`);
