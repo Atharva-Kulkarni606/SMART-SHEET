@@ -36,7 +36,7 @@ for(let i = 0; i < rows ; i++) {
 let formulaBar = document.querySelector(".formula-bar");
 //NORMAL EXPRESSION DONE
 //ADD EVENT LISTNER TO FORMULA BACK IF ANYONE PRESSES ENTER
-formulaBar.addEventListener("keydown" , (e) => {
+formulaBar.addEventListener("keydown" , async (e) => {
     let inputFormula = formulaBar.value;
     if(e.key === "Enter" && inputFormula) {
         //IF CHANGE IN RELATION(FORMULA) OCCURS
@@ -51,9 +51,17 @@ formulaBar.addEventListener("keydown" , (e) => {
         addChildToGraphComponent(inputFormula , address);
         //check if formula is cyclic or not -> if non cyclic then evaluate else
         // alert the user 
-        let isCyclic = isGraphCyclic(graphComponentMatrix);
-        if(isCyclic) {
-            alert("Your Formula is Cycle");
+        let cycleResponse = isGraphCyclic(graphComponentMatrix);
+        if(cycleResponse) {
+            // alert("Your Formula is Cycle");
+            let response = confirm("Your formula is cyclic. Do you want to trace your path??");
+            while(response === true) {
+                //keep on tracing the path until the user clicks ok
+                //ATTACH AWAIT HERE ALSO AS I WANT TO COMPLETE ITERATION
+                await isGraphCyclicTracePath(graphComponentMatrix, cycleResponse);
+                response = confirm("Your formula is cyclic. Do you want to trace your path??");
+            }
+
             //YOU HAVE TO BREAK THE RELATION AS WELL AS ITS USELESS NOW
             removeChildFromGraphComponent(inputFormula , address);
             return;

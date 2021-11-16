@@ -37,13 +37,13 @@ function isGraphCyclic(graphComponentMatrix) {
             if(vis[i][j] === false){
                 //if there is cycle in any component then there is  a cycle in entire graph
                 if(dfsCycleDetection(graphComponentMatrix, i , j , vis, dfsvis)) {
-                    return true;
+                    return [i , j];
                 }
             }
         }
     }
     //No cycle exists in my graph
-    return false;
+    return null;
 }
 
 
