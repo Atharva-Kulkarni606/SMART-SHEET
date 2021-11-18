@@ -1,15 +1,16 @@
 //STORAGE 2D MATRIX 
+let collectedGraphComponent = [];
+
 let graphComponentMatrix = [];
 
-
-for(let i = 0; i < rows; i++) {
-    let row = [];
-    for(let j = 0 ; j < cols; j++) {
-        //Make array instead of obj (more than one child relation can exist)
-        row.push([]);
-    }
-    graphComponentMatrix.push(row);
-}
+// for(let i = 0; i < rows; i++) {
+//     let row = [];
+//     for(let j = 0 ; j < cols; j++) {
+//         //Make array instead of obj (more than one child relation can exist)
+//         row.push([]);
+//     }
+//     graphComponentMatrix.push(row);
+// }
 
 //RETURNS TRUE IF CYCLE IS PRESENT ELSE RET FALSE;
 function isGraphCyclic(graphComponentMatrix) {

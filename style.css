@@ -17,8 +17,19 @@ body {
 
 
 .page-action {
-    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5rem;
+    height: 2rem;
+    text-align: center;
     color: #f1f2f6;
+}
+
+
+.selected-page-action {
+    background-color: #f1f2f6;
+    color: #218c74;
 }
 
 .cellprop-actions-cont {
@@ -101,6 +112,7 @@ body {
 
 .sheet-add-icon {
     width: 2vw;
+    cursor: pointer;
 }
 
 .sheets-folder-cont {
@@ -109,15 +121,27 @@ body {
     display: flex;
     align-items: center;
     width: calc(100vw - 2vw);
+    overflow: auto;
 }
 
 .sheet-folder {
+    height: 80%;
     text-decoration: underline;
     font-weight: bold;
     text-decoration-thickness: 3px;
     font-size: 0.9rem;
+    /* background-color: lightblue; */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.sheet-content {
+    width: 5rem;
+    /* background-color: lightgreen; */
+}
+ 
 .grid-cont {
     height: calc(100vh - 3rem - 2rem - 3rem - 3rem);
     background-color: #ecf0f1;

@@ -1,27 +1,33 @@
 //HANDLE STORAGE
 // MATRIX (OUTER)
+let collectedSheetDB = [];
 let sheetDB = [];
 
-for(let i = 0 ; i < rows; i++) {
-    let sheetRow = [];//INNER ARRAY
-    for(let j = 0; j < cols; j++) {
-        let cellProp = {
-            bold : false,
-            italic : false,
-            underline : false,
-            alignment : "left",
-            fontFamily : "monospace",
-            fontSize : "14",
-            fontColor : "#000000", // black default(only indication)
-            BGcolor : "#000000", // default value (only indication)
-            value : "",
-            formula : "",
-            children : [],
-        }
-        sheetRow.push(cellProp);
-    }
-    sheetDB.push(sheetRow);
+{
+    let addSheetBtn = document.querySelector(".sheet-add-icon");
+    addSheetBtn.click();
 }
+
+// for(let i = 0 ; i < rows; i++) {
+//     let sheetRow = [];//INNER ARRAY
+//     for(let j = 0; j < cols; j++) {
+//         let cellProp = {
+//             bold : false,
+//             italic : false,
+//             underline : false,
+//             alignment : "left",
+//             fontFamily : "monospace",
+//             fontSize : "14",
+//             fontColor : "#000000", // black default(only indication)
+//             BGcolor : "#000000", // default value (only indication)
+//             value : "",
+//             formula : "",
+//             children : [],
+//         }
+//         sheetRow.push(cellProp);
+//     }
+//     sheetDB.push(sheetRow);
+// }
 
 
 //SELECTORS FOR CELL PROPERTIES
@@ -55,6 +61,7 @@ bold.addEventListener("click" , (e) => {
     cell.style.fontWeight = cellProp.bold ? "bold" : "normal";
     //for icon to show it as active
     bold.style.backgroundColor =  cellProp.bold ? activeColorProp : inActiveColorProp;
+    sheetDB.click();
 });
 
 
@@ -213,7 +220,7 @@ function addListenerToAttachCellProperties(cell){
         }
         let formulaBar = document.querySelector(".formula-bar");
         formulaBar.value = cellProp.formula;
-        cell.value = cellProp.value;
+        cell.innerText = cellProp.value;
     });
 };
 
